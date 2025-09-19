@@ -1,0 +1,146 @@
+/* Content item container */
+.contentItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.contentItem:hover {
+  background-color: #f8f9fa;
+}
+
+.contentItem.selected {
+  background-color: #e3f2fd;
+  border-left: 4px solid #007bff;
+}
+
+/* Item number */
+.itemNumber {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  min-width: 60px;
+  margin-right: 16px;
+}
+
+/* Main content area */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+  line-height: 1.4;
+}
+
+/* Category tag */
+.categoryTag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  align-self: flex-start;
+}
+
+/* Actions container */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Status indicators */
+.status {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.notLearned {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.learned {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.jiJing {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background-color: #fff3cd;
+  color: #856404;
+  border-radius: 4px;
+}
+
+/* Action buttons */
+.favoriteButton,
+.audioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteButton:hover,
+.audioButton:hover {
+  background-color: #e9ecef;
+}
+
+.favoriteIcon,
+.audioIcon {
+  font-size: 16px;
+}
+
+.favoriteIcon {
+  color: #ffc107;
+}
+
+.audioIcon {
+  color: #007bff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .contentItem {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .itemNumber {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  
+  .mainContent {
+    width: 100%;
+  }
+  
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
