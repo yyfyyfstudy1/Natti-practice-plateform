@@ -7,6 +7,7 @@ import { addQuestion, updateQuestion, getQuestions } from '../../firebase/questi
 import { addQuestionDetail, updateQuestionDetail, getQuestionDetail } from '../../firebase/questionDetailService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLoading } from '../../contexts/LoadingContext';
+import { generateTTSForQuestion } from '../../firebase/functionsService';
 
 const QuestionManager = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const QuestionManager = () => {
   const [dialogs, setDialogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [ttsGenerating, setTtsGenerating] = useState(false);
 
   const categories = [
     { value: 'housing', label: 'Housing' },
@@ -95,6 +97,44 @@ const QuestionManager = () => {
 
   const handleIntroAudioUpload = (uploadResult) => {
     handleInputChange('introductionAudio', uploadResult.url);
+  };
+
+  const handleGenerateAudio = async () => {
+    try {
+      setTtsGenerating(true);
+      setError('');
+
+      const payload = {
+        docId: questionId || undefined,
+        introduction: formData.introduction,
+        dialogs: dialogs.map(d => ({ id: d.id, originalText: d.originalText, translation: d.translation }))
+      };
+
+      const data = await withLoading(() => generateTTSForQuestion(payload));
+
+      if (data?.introductionAudio) {
+        handleInputChange('introductionAudio', data.introductionAudio);
+      }
+
+      if (Array.isArray(data?.dialogs)) {
+        const updated = dialogs.map(d => {
+          const found = data.dialogs.find(x => x.id === d.id);
+          if (!found) return d;
+          return {
+            ...d,
+            dialogAudio: found.dialogAudio || d.dialogAudio,
+            translationAudio: found.translationAudio || d.translationAudio
+          };
+        });
+        setDialogs(updated);
+      }
+
+    } catch (err) {
+      console.error('Generate TTS error:', err);
+      setError('Failed to generate audio. Please try again.');
+    } finally {
+      setTtsGenerating(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -244,7 +284,18 @@ const QuestionManager = () => {
 
         {/* Introduction Section */}
         <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Introduction</h3>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <h3 className={styles.sectionTitle} style={{border:'none', paddingBottom:0}}>Introduction</h3>
+            <button
+              type="button"
+              className={styles.cancelButton}
+              onClick={handleGenerateAudio}
+              disabled={ttsGenerating || !formData.introduction.trim()}
+              title={!formData.introduction.trim() ? 'Enter introduction text first' : 'Generate audio from text'}
+            >
+              {ttsGenerating ? 'Generating...' : 'Generate Audio'}
+            </button>
+          </div>
           
           <div className={styles.formGroup}>
             <label className={styles.label}>Introduction Text *</label>
@@ -281,6 +332,17 @@ const QuestionManager = () => {
           <DialogManager
             dialogs={dialogs}
             onDialogsChange={setDialogs}
+            onGenerateDialogAudios={async (partial) => {
+              // partial: { dialogs: [{id, originalText?}|{id, translation?}] }
+              const payload = {
+                docId: questionId || undefined,
+                introduction: '',
+                dialogs: partial.dialogs || []
+              };
+              const data = await withLoading(() => generateTTSForQuestion(payload));
+              // 回调给子组件由其自行回填对应字段
+              return data;
+            }}
           />
         </div>
 

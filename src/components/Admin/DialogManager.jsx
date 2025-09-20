@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './DialogManager.module.css';
 import AudioUpload from './AudioUpload';
 
-const DialogManager = ({ dialogs = [], onDialogsChange }) => {
+const DialogManager = ({ dialogs = [], onDialogsChange, onGenerateDialogAudios }) => {
   const [expandedDialog, setExpandedDialog] = useState(null);
 
   const addNewDialog = () => {
@@ -39,6 +39,20 @@ const DialogManager = ({ dialogs = [], onDialogsChange }) => {
 
   const handleAudioUpload = (dialogId, audioType, uploadResult) => {
     updateDialog(dialogId, audioType, uploadResult.url);
+  };
+
+  const handleGenerateOriginal = async (dialog) => {
+    if (!onGenerateDialogAudios) return;
+    const res = await onGenerateDialogAudios({ dialogs: [{ id: dialog.id, originalText: dialog.originalText }] });
+    const found = Array.isArray(res?.dialogs) ? res.dialogs.find(d => d.id === dialog.id) : null;
+    if (found?.dialogAudio) updateDialog(dialog.id, 'dialogAudio', found.dialogAudio);
+  };
+
+  const handleGenerateTranslation = async (dialog) => {
+    if (!onGenerateDialogAudios) return;
+    const res = await onGenerateDialogAudios({ dialogs: [{ id: dialog.id, translation: dialog.translation }] });
+    const found = Array.isArray(res?.dialogs) ? res.dialogs.find(d => d.id === dialog.id) : null;
+    if (found?.translationAudio) updateDialog(dialog.id, 'translationAudio', found.translationAudio);
   };
 
   return (
@@ -100,6 +114,11 @@ const DialogManager = ({ dialogs = [], onDialogsChange }) => {
                       className={styles.textarea}
                       rows={3}
                     />
+                    <div style={{display:'flex', gap:8, alignItems:'center'}}>
+                      <button type="button" className={styles.addButton} onClick={() => handleGenerateOriginal(dialog)} disabled={!dialog.originalText.trim()}>
+                        Generate Audio
+                      </button>
+                    </div>
                     
                     <div className={styles.audioSection}>
                       <span className={styles.audioLabel}>Original Audio:</span>
@@ -131,6 +150,11 @@ const DialogManager = ({ dialogs = [], onDialogsChange }) => {
                       className={styles.textarea}
                       rows={3}
                     />
+                    <div style={{display:'flex', gap:8, alignItems:'center'}}>
+                      <button type="button" className={styles.addButton} onClick={() => handleGenerateTranslation(dialog)} disabled={!dialog.translation.trim()}>
+                        Generate Audio
+                      </button>
+                    </div>
                     
                     <div className={styles.audioSection}>
                       <span className={styles.audioLabel}>Translation Audio:</span>
