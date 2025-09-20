@@ -14,6 +14,38 @@ VITE_FIREBASE_MEASUREMENT_ID=...
 
 Alternatively, you can create `.env.development`/`.env.production` using the same keys. Vite exposes them as `import.meta.env.VITE_*`.
 
+## Serverless audio generation (Firebase Functions + OpenAI TTS)
+
+1) Install Firebase CLI and login
+```
+npm i -g firebase-tools
+firebase login
+```
+
+2) Configure secrets (recommended)
+```
+firebase functions:secrets:set OPENAI_API_KEY
+# Optional voice settings
+firebase functions:secrets:set OPENAI_TTS_MODEL --data="gpt-4o-mini-tts"
+firebase functions:secrets:set OPENAI_TTS_VOICE --data="alloy"
+```
+
+3) Deploy functions
+```
+cd functions
+npm run deploy
+```
+
+Local emulation (optional)
+```
+cd functions
+cp .env.example .env
+# fill in OPENAI_API_KEY, then
+npm run serve
+```
+
+The function `onQuestionDetailWrite` listens to Firestore `questionDetails/{docId}` and will auto-generate audio for introduction and dialogs if missing, uploading files to Storage at `auto_audio/{docId}/...` and patching URLs back onto the document.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

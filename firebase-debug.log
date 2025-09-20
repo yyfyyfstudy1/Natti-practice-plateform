@@ -1,0 +1,46 @@
+[debug] [2025-09-20T16:42:47.203Z] ----------------------------------------------------------------------
+[debug] [2025-09-20T16:42:47.205Z] Command:       /usr/local/bin/firebase /Users/mt/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase init functions
+[debug] [2025-09-20T16:42:47.206Z] CLI Version:   12.5.2
+[debug] [2025-09-20T16:42:47.206Z] Platform:      darwin
+[debug] [2025-09-20T16:42:47.207Z] Node Version:  v16.16.0
+[debug] [2025-09-20T16:42:47.212Z] Time:          Sun Sep 21 2025 02:42:47 GMT+1000 (Australian Eastern Standard Time)
+[debug] [2025-09-20T16:42:47.213Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-09-20T16:42:47.222Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-09-20T16:42:47.259Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-20T16:42:47.261Z] > authorizing via signed-in user (yyfnhk@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/mt/Natti-practice-plateform
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-09-20T16:42:47.502Z] > refreshing access token with scopes: []
+[debug] [2025-09-20T16:42:47.507Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-09-20T16:42:47.510Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-20T16:42:47.782Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2025-09-20T16:42:47.785Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-09-20T16:42:47.786Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-09-20T16:42:47.911Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-09-20T16:42:47.912Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-09-20T16:42:48.355Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2025-09-20T16:42:48.356Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-09-20T16:42:48.357Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2025-09-20T16:42:48.614Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (/Users/mt/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/Users/mt/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/apiv2.js:285:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.

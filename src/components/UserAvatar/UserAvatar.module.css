@@ -1,0 +1,188 @@
+/* Container */
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* User section */
+.userSection {
+  position: relative;
+}
+
+/* Avatar */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 2px solid #e9ecef;
+}
+
+.avatar:hover {
+  border-color: #007bff;
+  transform: scale(1.05);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarText {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Login button */
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+
+.loginIcon {
+  font-size: 16px;
+}
+
+/* Dropdown overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px 0;
+  min-width: 200px;
+  z-index: 999;
+}
+
+/* User info */
+.userInfo {
+  padding: 8px 16px;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 2px;
+}
+
+.userEmail {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Divider */
+.divider {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Admin button */
+.adminButton {
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.adminButton:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.adminIcon {
+  font-size: 16px;
+}
+
+/* Logout button */
+.logoutButton {
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #f8f9fa;
+  color: #dc3545;
+}
+
+.logoutIcon {
+  font-size: 16px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dropdown {
+    right: -10px;
+    min-width: 180px;
+  }
+  
+  .loginButton {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .avatarText {
+    font-size: 14px;
+  }
+}

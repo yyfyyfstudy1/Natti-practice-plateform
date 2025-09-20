@@ -1,0 +1,193 @@
+/* Audio Player Container */
+.audioPlayer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  min-height: 48px;
+}
+
+/* Play/Pause Button */
+.playButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.playButton:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.playButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.playButton:active {
+  transform: scale(0.95);
+}
+
+/* Icons */
+.playIcon,
+.pauseIcon,
+.loadingIcon {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Progress Container */
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Time Display */
+.timeDisplay {
+  font-size: 12px;
+  color: #6c757d;
+  font-family: 'Courier New', monospace;
+  min-width: 35px;
+  text-align: center;
+}
+
+/* Progress Bar */
+.progressBar {
+  flex: 1;
+  cursor: pointer;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 4px;
+  background-color: #e9ecef;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #007bff;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.progressBar:hover .progressFill::after {
+  opacity: 1;
+}
+
+/* Menu Button */
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: #6c757d;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.menuButton:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.menuIcon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .audioPlayer {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  
+  .playButton {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .playIcon,
+  .pauseIcon,
+  .loadingIcon {
+    font-size: 12px;
+  }
+  
+  .timeDisplay {
+    font-size: 11px;
+    min-width: 30px;
+  }
+  
+  .progressTrack {
+    height: 6px;
+  }
+  
+  .progressFill::after {
+    width: 14px;
+    height: 14px;
+    right: -7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeDisplay {
+    display: none;
+  }
+  
+  .progressContainer {
+    gap: 4px;
+  }
+}
