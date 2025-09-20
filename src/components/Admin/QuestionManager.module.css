@@ -91,6 +91,61 @@
   padding-bottom: 16px;
 }
 
+/* Action Row for generate vs upload */
+.actionRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
+  margin: 8px 0 12px 0;
+}
+
+.orDivider {
+  font-size: 12px;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #fff;
+  padding: 4px 8px;
+  border: 1px dashed #dee2e6;
+  border-radius: 999px;
+}
+
+.generateButton {
+  padding: 12px 16px;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  justify-self: start;
+}
+
+.generateButton:disabled {
+  background-color: #9a84d6;
+  cursor: not-allowed;
+}
+
+.generateButton:hover:not(:disabled) {
+  background-color: #5a32a4;
+}
+
+.optionHint {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: -4px;
+}
+
+.cardBox {
+  border: 1px dashed #c7d2fe;
+  background: #f8f9ff;
+  padding: 16px;
+  border-radius: 10px;
+}
+
 /* Form Groups */
 .formGroup {
   display: flex;

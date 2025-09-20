@@ -205,6 +205,59 @@
   height: 32px;
 }
 
+/* Added: action row for generate vs upload inside each dialog section */
+.actionRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.orDivider {
+  font-size: 12px;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #fff;
+  padding: 4px 8px;
+  border: 1px dashed #dee2e6;
+  border-radius: 999px;
+}
+
+.generateButton {
+  padding: 10px 14px;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  justify-self: start;
+}
+
+.generateButton:disabled {
+  background-color: #9a84d6;
+  cursor: not-allowed;
+}
+
+.generateButton:hover:not(:disabled) {
+  background-color: #5a32a4;
+}
+
+.cardBox {
+  border: 1px dashed #c7d2fe;
+  background: #f8f9ff;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.optionHint {
+  font-size: 12px;
+  color: #6c757d;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .header {

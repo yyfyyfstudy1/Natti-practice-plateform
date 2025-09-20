@@ -284,18 +284,7 @@ const QuestionManager = () => {
 
         {/* Introduction Section */}
         <div className={styles.section}>
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            <h3 className={styles.sectionTitle} style={{border:'none', paddingBottom:0}}>Introduction</h3>
-            <button
-              type="button"
-              className={styles.cancelButton}
-              onClick={handleGenerateAudio}
-              disabled={ttsGenerating || !formData.introduction.trim()}
-              title={!formData.introduction.trim() ? 'Enter introduction text first' : 'Generate audio from text'}
-            >
-              {ttsGenerating ? 'Generating...' : 'Generate Audio'}
-            </button>
-          </div>
+          <h3 className={styles.sectionTitle}>Introduction</h3>
           
           <div className={styles.formGroup}>
             <label className={styles.label}>Introduction Text *</label>
@@ -309,14 +298,29 @@ const QuestionManager = () => {
             />
           </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Introduction Audio</label>
-            <AudioUpload
-              onUploadComplete={handleIntroAudioUpload}
-              label="Upload Introduction Audio"
-              folder="audio/introductions"
-              className={styles.audioUpload}
-            />
+          <div className={styles.cardBox}>
+            <div className={styles.actionRow}>
+              <button
+                type="button"
+                className={styles.generateButton}
+                onClick={handleGenerateAudio}
+                disabled={ttsGenerating || !formData.introduction.trim()}
+                title={!formData.introduction.trim() ? 'Enter introduction text first' : 'Generate audio from text'}
+              >
+                {ttsGenerating ? 'Generating…' : 'Generate Audio from Text'}
+              </button>
+              <span className={styles.orDivider}>or</span>
+              <div>
+                <AudioUpload
+                  onUploadComplete={handleIntroAudioUpload}
+                  label="Upload Introduction Audio"
+                  folder="audio/introductions"
+                  className={styles.audioUpload}
+                />
+                <div className={styles.optionHint}>Upload your own audio file instead</div>
+              </div>
+            </div>
+
             {formData.introductionAudio && (
               <div className={styles.audioPreview}>
                 <audio controls src={formData.introductionAudio} className={styles.audioPlayer}>

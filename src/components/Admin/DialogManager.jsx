@@ -114,28 +114,31 @@ const DialogManager = ({ dialogs = [], onDialogsChange, onGenerateDialogAudios }
                       className={styles.textarea}
                       rows={3}
                     />
-                    <div style={{display:'flex', gap:8, alignItems:'center'}}>
-                      <button type="button" className={styles.addButton} onClick={() => handleGenerateOriginal(dialog)} disabled={!dialog.originalText.trim()}>
-                        Generate Audio
-                      </button>
+                    <div className={styles.cardBox}>
+                      <div className={styles.actionRow}>
+                        <button type="button" className={styles.generateButton} onClick={() => handleGenerateOriginal(dialog)} disabled={!dialog.originalText.trim()}>
+                          Generate Audio from Text
+                        </button>
+                        <span className={styles.orDivider}>or</span>
+                        <div>
+                          <AudioUpload
+                            onUploadComplete={(result) => handleAudioUpload(dialog.id, 'dialogAudio', result)}
+                            label="Upload Original Audio"
+                            folder={`audio/dialogs/original`}
+                            className={styles.audioUpload}
+                          />
+                          <div className={styles.optionHint}>Upload your own audio file instead</div>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className={styles.audioSection}>
-                      <span className={styles.audioLabel}>Original Audio:</span>
-                      <AudioUpload
-                        onUploadComplete={(result) => handleAudioUpload(dialog.id, 'dialogAudio', result)}
-                        label="Upload Original Audio"
-                        folder={`audio/dialogs/original`}
-                        className={styles.audioUpload}
-                      />
-                      {dialog.dialogAudio && (
-                        <div className={styles.audioPreview}>
-                          <audio controls src={dialog.dialogAudio} className={styles.audioPlayer}>
-                            Your browser does not support audio playback.
-                          </audio>
-                        </div>
-                      )}
-                    </div>
+                    {dialog.dialogAudio && (
+                      <div className={styles.audioPreview}>
+                        <audio controls src={dialog.dialogAudio} className={styles.audioPlayer}>
+                          Your browser does not support audio playback.
+                        </audio>
+                      </div>
+                    )}
                   </div>
 
                   {/* Translation */}
@@ -150,28 +153,31 @@ const DialogManager = ({ dialogs = [], onDialogsChange, onGenerateDialogAudios }
                       className={styles.textarea}
                       rows={3}
                     />
-                    <div style={{display:'flex', gap:8, alignItems:'center'}}>
-                      <button type="button" className={styles.addButton} onClick={() => handleGenerateTranslation(dialog)} disabled={!dialog.translation.trim()}>
-                        Generate Audio
-                      </button>
+                    <div className={styles.cardBox}>
+                      <div className={styles.actionRow}>
+                        <button type="button" className={styles.generateButton} onClick={() => handleGenerateTranslation(dialog)} disabled={!dialog.translation.trim()}>
+                          Generate Audio from Text
+                        </button>
+                        <span className={styles.orDivider}>or</span>
+                        <div>
+                          <AudioUpload
+                            onUploadComplete={(result) => handleAudioUpload(dialog.id, 'translationAudio', result)}
+                            label="Upload Translation Audio"
+                            folder={`audio/dialogs/translation`}
+                            className={styles.audioUpload}
+                          />
+                          <div className={styles.optionHint}>Upload your own audio file instead</div>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className={styles.audioSection}>
-                      <span className={styles.audioLabel}>Translation Audio:</span>
-                      <AudioUpload
-                        onUploadComplete={(result) => handleAudioUpload(dialog.id, 'translationAudio', result)}
-                        label="Upload Translation Audio"
-                        folder={`audio/dialogs/translation`}
-                        className={styles.audioUpload}
-                      />
-                      {dialog.translationAudio && (
-                        <div className={styles.audioPreview}>
-                          <audio controls src={dialog.translationAudio} className={styles.audioPlayer}>
-                            Your browser does not support audio playback.
-                          </audio>
-                        </div>
-                      )}
-                    </div>
+                    {dialog.translationAudio && (
+                      <div className={styles.audioPreview}>
+                        <audio controls src={dialog.translationAudio} className={styles.audioPlayer}>
+                          Your browser does not support audio playback.
+                        </audio>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
