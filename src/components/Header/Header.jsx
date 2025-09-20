@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
+import UserAvatar from '../UserAvatar/UserAvatar';
+import AuthModal from '../Auth/AuthModal';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedTimeRange, setSelectedTimeRange] = useState('');
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Filter options data
   const tagOptions = [
@@ -41,71 +44,92 @@ const Header = () => {
     console.log('Random question clicked');
   };
 
+  const handleLoginClick = () => {
+    setShowAuthModal(true);
+  };
+
+  const handleCloseAuthModal = () => {
+    setShowAuthModal(false);
+  };
+
   return (
-    <header className={styles.header}>
-      {/* Page title with cat icon */}
-      <div className={styles.titleSection}>
-        <h1 className={styles.pageTitle}>
-          <span className={styles.catIcon}>🐱</span>
-          Question Sets
-        </h1>
-      </div>
+    <>
+      <header className={styles.header}>
+        {/* Page title with cat icon */}
+        <div className={styles.titleSection}>
+          <h1 className={styles.pageTitle}>
+            <span className={styles.catIcon}>🐱</span>
+            Question Sets
+          </h1>
+        </div>
 
-      {/* Filter and search controls */}
-      <div className={styles.controlsSection}>
-        {/* Filter tag dropdown */}
-        <div className={styles.filterGroup}>
-          <select 
-            value={selectedTag} 
-            onChange={handleTagChange}
-            className={styles.filterSelect}
+        {/* Filter and search controls */}
+        <div className={styles.controlsSection}>
+          {/* Filter tag dropdown */}
+          <div className={styles.filterGroup}>
+            <select 
+              value={selectedTag} 
+              onChange={handleTagChange}
+              className={styles.filterSelect}
+            >
+              {tagOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <span className={styles.filterIcon}>🔍</span>
+          </div>
+
+          {/* Time range filter dropdown */}
+          <div className={styles.filterGroup}>
+            <select 
+              value={selectedTimeRange} 
+              onChange={handleTimeRangeChange}
+              className={styles.filterSelect}
+            >
+              {timeRangeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <span className={styles.filterIcon}>🕒</span>
+          </div>
+
+          {/* Search input */}
+          <div className={styles.searchGroup}>
+            <input
+              type="text"
+              placeholder="Search conversation titles..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className={styles.searchInput}
+            />
+          </div>
+
+          {/* Random question button */}
+          <button 
+            onClick={handleRandomQuestion}
+            className={styles.randomButton}
           >
-            {tagOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <span className={styles.filterIcon}>🔍</span>
-        </div>
+            <span className={styles.randomIcon}>🔄</span>
+            Random Question
+          </button>
 
-        {/* Time range filter dropdown */}
-        <div className={styles.filterGroup}>
-          <select 
-            value={selectedTimeRange} 
-            onChange={handleTimeRangeChange}
-            className={styles.filterSelect}
-          >
-            {timeRangeOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <span className={styles.filterIcon}>🕒</span>
+          {/* User Avatar */}
+          <div className={styles.userSection}>
+            <UserAvatar onLoginClick={handleLoginClick} />
+          </div>
         </div>
+      </header>
 
-        {/* Search input */}
-        <div className={styles.searchGroup}>
-          <input
-            type="text"
-            placeholder="Search conversation titles..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className={styles.searchInput}
-          />
-        </div>
-
-        {/* Random question button */}
-        <button 
-          onClick={handleRandomQuestion}
-          className={styles.randomButton}
-        >
-          <span className={styles.randomIcon}>🔄</span>
-          Random Question
-        </button>
-      </div>
-    </header>
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={handleCloseAuthModal} 
+      />
+    </>
   );
 };
 

@@ -1,0 +1,231 @@
+/* Upload Container */
+.uploadContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Upload Area */
+.uploadArea {
+  position: relative;
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.uploadArea:hover {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.uploadArea.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* File Input */
+.fileInput {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Upload Label */
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.uploadLabel.disabled {
+  cursor: not-allowed;
+}
+
+/* Upload Icon */
+.uploadIcon {
+  font-size: 32px;
+  color: #6c757d;
+  transition: color 0.3s ease;
+}
+
+.uploadArea:hover .uploadIcon {
+  color: #007bff;
+}
+
+/* Upload Text */
+.uploadText {
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+.fileName {
+  font-size: 14px;
+  color: #28a745;
+  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Progress Container */
+.progressContainer {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Messages */
+.errorMessage,
+.successMessage {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.successMessage {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Buttons */
+.retryButton,
+.newUploadButton {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.retryButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.retryButton:hover {
+  background-color: #c82333;
+}
+
+.newUploadButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.newUploadButton:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .uploadArea {
+    padding: 16px;
+  }
+  
+  .uploadIcon {
+    font-size: 28px;
+  }
+  
+  .uploadText {
+    font-size: 15px;
+  }
+  
+  .fileName {
+    font-size: 13px;
+  }
+  
+  .progressContainer {
+    margin-top: 12px;
+    gap: 8px;
+  }
+  
+  .progressText {
+    font-size: 13px;
+    min-width: 30px;
+  }
+  
+  .errorMessage,
+  .successMessage {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .retryButton,
+  .newUploadButton {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .uploadContainer {
+    max-width: 100%;
+  }
+  
+  .uploadArea {
+    padding: 12px;
+  }
+  
+  .uploadIcon {
+    font-size: 24px;
+  }
+  
+  .uploadText {
+    font-size: 14px;
+  }
+  
+  .progressBar {
+    height: 6px;
+  }
+}

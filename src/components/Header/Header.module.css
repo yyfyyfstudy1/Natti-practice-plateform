@@ -3,8 +3,12 @@
   background-color: white;
   border-bottom: 1px solid #e9ecef;
   padding: 20px 24px;
-  margin-left: 240px; /* Account for sidebar width */
+  margin-left: 0; /* Align with .main-content which already offsets for sidebar */
   transition: margin-left 0.3s ease;
+  position: sticky; /* Keep header visible */
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: saturate(180%) blur(4px);
 }
 
 /* Title section */
@@ -121,6 +125,11 @@
 
 .randomIcon {
   font-size: 16px;
+}
+
+/* User section */
+.userSection {
+  margin-left: auto;
 }
 
 /* Responsive design */

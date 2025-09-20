@@ -1,93 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentItem from '../ContentItem/ContentItem';
 import styles from './Content.module.css';
+import { getQuestions, initializeMockData } from '../../firebase/questionService';
+import { initializeQuestionDetailMockData } from '../../firebase/questionDetailService';
 
 const Content = () => {
-  const [selectedItemId, setSelectedItemId] = useState(3); // Default to item 3 as shown in the image
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [contentItems, setContentItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Sample data - in a real app, this would come from props or API
-  const contentItems = [
-    {
-      id: 1,
-      title: 'Build a House',
-      category: 'housing',
-      isLearned: false,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 2,
-      title: 'Domestic Violence',
-      category: 'social-welfare',
-      isLearned: false,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 3,
-      title: 'Domestic Violence Legal',
-      category: 'legal',
-      isLearned: false,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 4,
-      title: 'Australian Immigration',
-      category: 'immigration',
-      isLearned: true,
-      isJiJing: true,
-      isFavorite: true,
-    },
-    {
-      id: 5,
-      title: 'Medical Emergency',
-      category: 'medical',
-      isLearned: false,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 6,
-      title: 'Housing Application',
-      category: 'housing',
-      isLearned: true,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 7,
-      title: 'Social Welfare Benefits',
-      category: 'social-welfare',
-      isLearned: false,
-      isJiJing: true,
-      isFavorite: false,
-    },
-    {
-      id: 8,
-      title: 'Legal Consultation',
-      category: 'legal',
-      isLearned: true,
-      isJiJing: false,
-      isFavorite: true,
-    },
-    {
-      id: 9,
-      title: 'Immigration Process',
-      category: 'immigration',
-      isLearned: false,
-      isJiJing: false,
-      isFavorite: false,
-    },
-    {
-      id: 10,
-      title: 'Medical Check-up',
-      category: 'medical',
-      isLearned: true,
-      isJiJing: true,
-      isFavorite: false,
-    },
-  ];
+  // Initialize data
+  useEffect(() => {
+    const initializeData = async () => {
+      try {
+        setLoading(true);
+        
+        // First try to initialize mock data (if database is empty)
+        await initializeMockData();
+        
+        // Initialize question detail mock data
+        await initializeQuestionDetailMockData();
+        
+        // Get questions data
+        const questions = await getQuestions();
+        
+        // Transform data format to fit existing ContentItem component
+        const formattedItems = questions.map((question) => ({
+          id: question.id,
+          title: question.questionTitle,
+          category: question.category,
+          isJiJing: question.isJiJing || false,
+          questionDate: question.questionDate,
+          updateTime: question.updateTime,
+          uploadTime: question.uploadTime,
+        }));
+        
+        setContentItems(formattedItems);
+        
+        // Set default selected to first item
+        if (formattedItems.length > 0) {
+          setSelectedItemId(formattedItems[0].id);
+        }
+        
+      } catch (err) {
+        console.error('Error initializing data:', err);
+        setError('Failed to load data, please refresh and try again');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initializeData();
+  }, []);
 
   // Handle item selection
   const handleItemSelect = (itemId) => {
@@ -110,16 +75,30 @@ const Content = () => {
     <main className={styles.content}>
       {/* Content list */}
       <div className={styles.contentList}>
-        {contentItems.map((item) => (
-          <ContentItem
-            key={item.id}
-            item={item}
-            isSelected={selectedItemId === item.id}
-            onSelect={handleItemSelect}
-            onToggleFavorite={handleToggleFavorite}
-            onPlayAudio={handlePlayAudio}
-          />
-        ))}
+        {loading ? (
+          <div className={styles.loadingMessage}>
+            Loading data...
+          </div>
+        ) : error ? (
+          <div className={styles.errorMessage}>
+            {error}
+          </div>
+        ) : contentItems.length === 0 ? (
+          <div className={styles.emptyMessage}>
+            No questions available
+          </div>
+        ) : (
+          contentItems.map((item) => (
+            <ContentItem
+              key={item.id}
+              item={item}
+              isSelected={selectedItemId === item.id}
+              onSelect={handleItemSelect}
+              onToggleFavorite={handleToggleFavorite}
+              onPlayAudio={handlePlayAudio}
+            />
+          ))
+        )}
       </div>
 
       {/* Background decoration - cat avatar */}

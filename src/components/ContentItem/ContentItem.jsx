@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './ContentItem.module.css';
 
 const ContentItem = ({ 
@@ -8,13 +9,12 @@ const ContentItem = ({
   onToggleFavorite, 
   onPlayAudio 
 }) => {
+  const navigate = useNavigate();
   const {
     id,
     title,
     category,
-    isLearned = false,
     isJiJing = false,
-    isFavorite = false,
   } = item;
 
   // Handle item selection
@@ -22,15 +22,10 @@ const ContentItem = ({
     if (onSelect) {
       onSelect(id);
     }
+    // Navigate to question detail page
+    navigate(`/question/${id}`);
   };
 
-  // Handle favorite toggle
-  const handleFavoriteToggle = (e) => {
-    e.stopPropagation(); // Prevent item selection
-    if (onToggleFavorite) {
-      onToggleFavorite(id);
-    }
-  };
 
   // Handle audio play
   const handleAudioPlay = (e) => {
@@ -80,11 +75,6 @@ const ContentItem = ({
 
       {/* Status and action buttons */}
       <div className={styles.actions}>
-        {/* Learning status */}
-        <span className={`${styles.status} ${isLearned ? styles.learned : styles.notLearned}`}>
-          {isLearned ? 'Learned' : 'Not Learned'}
-        </span>
-
         {/* Ji Jing status */}
         {isJiJing && (
           <span className={styles.jiJing}>
@@ -92,16 +82,10 @@ const ContentItem = ({
           </span>
         )}
 
-        {/* Favorite button */}
-        <button 
-          className={styles.favoriteButton}
-          onClick={handleFavoriteToggle}
-          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          <span className={styles.favoriteIcon}>
-            {isFavorite ? '⭐' : '☆'}
-          </span>
-        </button>
+        {/* Login prompt */}
+        <span className={styles.loginPrompt}>
+          Login to view details
+        </span>
 
         {/* Audio play button */}
         <button 

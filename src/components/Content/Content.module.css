@@ -1,6 +1,6 @@
 /* Content container */
 .content {
-  margin-left: 240px; /* Account for sidebar width */
+  margin-left: 0; /* main-content already accounts for sidebar */
   min-height: calc(100vh - 120px); /* Adjust based on header height */
   background-color: #f8f9fa;
   position: relative;
@@ -11,9 +11,34 @@
 /* Content list */
 .contentList {
   background-color: white;
-  margin: 0;
+  margin: 8px auto; /* Reduce gap below header */
   padding: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1400px; /* widen list to reduce right whitespace */
+  width: calc(100% - 112px); /* left/right 56px gutters */
+  border-radius: 8px;
+}
+
+/* Loading, error, and empty states */
+.loadingMessage,
+.errorMessage,
+.emptyMessage {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.loadingMessage {
+  color: #007bff;
+}
+
+.errorMessage {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin: 20px;
 }
 
 /* Background decoration */

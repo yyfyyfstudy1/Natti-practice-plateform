@@ -1,0 +1,307 @@
+/* Dialog Manager Container */
+.dialogManager {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #218838;
+}
+
+/* Empty State */
+.emptyState {
+  padding: 40px 20px;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Dialog List */
+.dialogList {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Dialog Card */
+.dialogCard {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.dialogCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dialog Header */
+.dialogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.dialogInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dialogNumber {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.expandButton:hover {
+  color: #495057;
+}
+
+.dialogActions {
+  display: flex;
+  gap: 8px;
+}
+
+.removeButton {
+  padding: 4px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+}
+
+/* Dialog Content */
+.dialogContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Text Section */
+.textSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #495057;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.textarea::placeholder {
+  color: #6c757d;
+}
+
+/* Audio Section */
+.audioSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.audioLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.audioUpload {
+  max-width: 500px;
+  width: 100%;
+}
+
+.audioPreview {
+  margin-top: 8px;
+}
+
+.audioPlayer {
+  width: 100%;
+  max-width: 400px;
+  height: 32px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .title {
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .addButton {
+    justify-content: center;
+  }
+  
+  .dialogList {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .dialogHeader {
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  
+  .dialogInfo {
+    justify-content: space-between;
+  }
+  
+  .dialogActions {
+    justify-content: flex-end;
+  }
+  
+  .dialogContent {
+    padding: 12px;
+    gap: 16px;
+  }
+  
+  .audioSection {
+    padding: 12px;
+  }
+  
+  .audioUpload {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialogManager {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .header {
+    padding: 10px 12px;
+  }
+  
+  .title {
+    font-size: 15px;
+  }
+  
+  .addButton {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .dialogList {
+    padding: 8px;
+  }
+  
+  .dialogCard {
+    border-radius: 6px;
+  }
+  
+  .dialogHeader {
+    padding: 8px 10px;
+  }
+  
+  .dialogNumber {
+    font-size: 13px;
+  }
+  
+  .dialogContent {
+    padding: 10px;
+  }
+  
+  .textarea {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  
+  .audioSection {
+    padding: 10px;
+  }
+}

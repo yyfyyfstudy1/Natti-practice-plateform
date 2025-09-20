@@ -29,7 +29,7 @@
 
 /* Main content area */
 .mainContent {
-  flex: 1;
+  flex: 1.2; /* give title area more room */
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -63,23 +63,6 @@
 }
 
 /* Status indicators */
-.status {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.notLearned {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.learned {
-  background-color: #d4edda;
-  color: #155724;
-}
-
 .jiJing {
   font-size: 12px;
   font-weight: 500;
@@ -89,8 +72,23 @@
   border-radius: 4px;
 }
 
+/* Login prompt */
+.loginPrompt {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.loginPrompt:hover {
+  background-color: #bbdefb;
+}
+
 /* Action buttons */
-.favoriteButton,
 .audioButton {
   background: none;
   border: none;
@@ -103,21 +101,12 @@
   justify-content: center;
 }
 
-.favoriteButton:hover,
 .audioButton:hover {
   background-color: #e9ecef;
 }
 
-.favoriteIcon,
 .audioIcon {
   font-size: 16px;
-}
-
-.favoriteIcon {
-  color: #ffc107;
-}
-
-.audioIcon {
   color: #007bff;
 }
 
